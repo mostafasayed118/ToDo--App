@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +14,7 @@ import '../data/model/task_model.dart';
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(TaskInitial());
   DateTime currentDate = DateTime.now();
-  DateTime selctedDate = DateTime.now();
+  DateTime selectedDate = DateTime.now();
   String startTime = DateFormat('hh:mm a').format(DateTime.now());
   String endTime = DateFormat('hh:mm a')
       .format(DateTime.now().add(const Duration(minutes: 45)));
@@ -35,14 +37,14 @@ class TaskCubit extends Cubit<TaskState> {
 
     if (pickedDate != null) {
       currentDate = pickedDate;
-      emit(GetDateSucessState());
+      emit(GetDateSuccessState());
     } else {
-      print('pickedDate == null');
+      log('pickedDate == null');
       emit(GetDateErrorState());
     }
   }
 
-  late TimeOfDay schduledTime;
+  late TimeOfDay scheduledTime;
   void getStartTime(context) async {
     emit(GetStartTimeLoadingState());
 
@@ -52,11 +54,11 @@ class TaskCubit extends Cubit<TaskState> {
     );
     if (pickedStartTime != null) {
       startTime = pickedStartTime.format(context);
-      schduledTime = pickedStartTime;
-      emit(GetStartTimeSucessState());
+      scheduledTime = pickedStartTime;
+      emit(GetStartTimeSuccessState());
     } else {
-      print('pickedStartTime ==null');
-      schduledTime =
+      log('pickedStartTime ==null');
+      scheduledTime =
           TimeOfDay(hour: currentDate.hour, minute: currentDate.minute);
       emit(GetStartTimeErrorState());
     }
@@ -71,9 +73,9 @@ class TaskCubit extends Cubit<TaskState> {
     );
     if (pickedEndTime != null) {
       endTime = pickedEndTime.format(context);
-      emit(GetEndTimeSucessState());
+      emit(GetEndTimeSuccessState());
     } else {
-      print('pickedStartTime ==null');
+      log('pickedStartTime ==null');
       emit(GetEndTimeErrorState());
     }
   }
@@ -104,9 +106,9 @@ class TaskCubit extends Cubit<TaskState> {
 
   void getSelectedDate(date) {
     emit(GetSelectedDateLoadingState());
-    selctedDate = date;
+    selectedDate = date;
 
-    emit(GetSelectedDateSucessState());
+    emit(GetSelectedDateSuccessState());
     getTasks();
   }
 
@@ -129,7 +131,7 @@ class TaskCubit extends Cubit<TaskState> {
 
       titleController.clear();
       noteController.clear();
-      emit(InsertTaskSucessState());
+      emit(InsertTaskSuccessState());
       getTasks();
     } catch (e) {
       emit(InsertTaskErrorState());
@@ -144,12 +146,12 @@ class TaskCubit extends Cubit<TaskState> {
           .map((e) => TaskModel.fromJson(e))
           .toList()
           .where(
-            (element) => element.date == DateFormat.yMd().format(selctedDate),
+            (element) => element.date == DateFormat.yMd().format(selectedDate),
           )
           .toList();
-      emit(GetDateSucessState());
+      emit(GetDateSuccessState());
     }).catchError((e) {
-      print(e.toString());
+      log(e.toString());
       emit(GetDateErrorState());
     });
   }
@@ -159,10 +161,10 @@ class TaskCubit extends Cubit<TaskState> {
     emit(UpdateTaskLoadingState());
 
     await sl<SqfliteHelper>().updatedDB(id).then((value) {
-      emit(UpdateTaskSucessState());
+      emit(UpdateTaskSuccessState());
       getTasks();
     }).catchError((e) {
-      print(e.toString());
+      log(e.toString());
       emit(UpdateTaskErrorState());
     });
   }
@@ -172,10 +174,10 @@ class TaskCubit extends Cubit<TaskState> {
     emit(DeleteTaskLoadingState());
 
     await sl<SqfliteHelper>().deleteFromDB(id).then((value) {
-      emit(DeleteTaskSucessState());
+      emit(DeleteTaskSuccessState());
       getTasks();
     }).catchError((e) {
-      print(e.toString());
+      log(e.toString());
       emit(DeleteTaskErrorState());
     });
   }

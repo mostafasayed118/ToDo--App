@@ -8,10 +8,31 @@ void navigate({required BuildContext context, required Widget screen}) {
     context,
     MaterialPageRoute(builder: (context) => screen),
   );
-  void navigateTo({required BuildContext context, required Widget screen}) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
-    
-  }
+}
+
+void navigateTo({required BuildContext context, required Widget screen}) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
+}
+
+void navigatorWithFuture(
+    {required BuildContext context,
+    required Widget screen,
+    required bool isVisited,
+    required String key,
+    required int seconds}) {
+  Future.delayed(
+    const Duration(seconds: 2),
+    () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return isVisited ? screen : screen;
+          },
+        ),
+      );
+    },
+  );
 }
 
 void showToast({

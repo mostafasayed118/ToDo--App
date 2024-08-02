@@ -30,6 +30,7 @@ class OnBoardingScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return Column(
                 children: [
+                  //! Skip Button
                   index != 2
                       ? Align(
                           alignment: Alignment.centerLeft,
@@ -46,32 +47,33 @@ class OnBoardingScreen extends StatelessWidget {
                                 ),
                           ))
                       : SizedBox(
-                          height: 50.h,
+                          height: 40.h,
                         ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  //Image
+                  //! onboarding  Image
                   Image.asset(
                       OnBoardingModel.onBoardingScreen[index].imagePath),
                   SizedBox(
                     height: 16.h,
                   ),
+                  //! onboarding indicator dots
                   SmoothPageIndicator(
                     controller: controller,
                     count: 3,
                     effect: ExpandingDotsEffect(
                       activeDotColor: AppColors.primary,
-                      dotColor: AppColors.white,
+                      dotColor: AppColors.grey,
                       dotHeight: 8.h,
-                      dotWidth: 8.w,
+                      dotWidth: 10.w,
                       spacing: 8,
                     ),
                   ),
                   SizedBox(
                     height: 50.h,
                   ),
-                  // onboarding title String
+                  //! onboarding title String
                   Text(
                     OnBoardingModel.onBoardingScreen[index].title,
                     style: Theme.of(context).textTheme.displayLarge!.copyWith(
@@ -79,9 +81,9 @@ class OnBoardingScreen extends StatelessWidget {
                         ),
                   ),
                   SizedBox(
-                    height: 40.h,
+                    height: 30.h,
                   ),
-                  // onboarding Subtitle String
+                  //! onboarding Subtitle String
                   Text(
                       textAlign: TextAlign.center,
                       OnBoardingModel.onBoardingScreen[index].subTitle,
@@ -90,8 +92,10 @@ class OnBoardingScreen extends StatelessWidget {
                           .displayMedium!
                           .copyWith(fontSize: 16.sp)),
                   SizedBox(
-                    height: 150.w,
+                    height: 70.h,
                   ),
+
+                  //! onboarding buttons
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -99,10 +103,12 @@ class OnBoardingScreen extends StatelessWidget {
                           ? CustomTextButton(
                               onPressed: () {
                                 controller.previousPage(
-                                    duration: const Duration(seconds: 1),
-                                    curve: Curves.fastLinearToSlowEaseIn);
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                );
                               },
-                              text: AppStrings.back)
+                              text: AppStrings.back,
+                            )
                           : Container(),
                       const Spacer(),
                       index != 2
@@ -113,7 +119,8 @@ class OnBoardingScreen extends StatelessWidget {
                                   curve: Curves.easeInOut,
                                 );
                               },
-                              text: AppStrings.next)
+                              text: AppStrings.next,
+                            )
                           : CustomElevatedButton(
                               onPressed: () async {
                                 // navigator();
@@ -137,7 +144,8 @@ class OnBoardingScreen extends StatelessWidget {
                                   },
                                 );
                               },
-                              text: AppStrings.getStarted)
+                              text: AppStrings.getStarted,
+                            )
                     ],
                   ),
                 ],

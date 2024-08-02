@@ -160,10 +160,10 @@ class HomePageScreen extends StatelessWidget {
           },
           backgroundColor: AppColors.primary,
           shape: const CircleBorder(),
-          child: const Icon(
+          child: Icon(
             Icons.add,
             color: AppColors.white,
-            size: 32,
+            size: 32.sp,
           ),
         ),
       ),
@@ -229,7 +229,7 @@ class TaskComponent extends StatelessWidget {
           builder: (context) {
             return Container(
               padding: const EdgeInsets.all(24),
-              height: 240,
+              height: 240.h,
               color: AppColors.deepGrey,
               child: Column(
                 children: [
@@ -237,8 +237,8 @@ class TaskComponent extends StatelessWidget {
                   taskModel.isCompleted == 1
                       ? Container()
                       : SizedBox(
-                          height: 48,
-                          width: double.infinity,
+                          height: 48.h,
+                          width: double.infinity.w,
                           child: CustomElevatedButton(
                             text: AppStrings.taskCompleted,
                             onPressed: () {
@@ -248,14 +248,14 @@ class TaskComponent extends StatelessWidget {
                             },
                           ),
                         ),
-                  const SizedBox(
-                    height: 24,
+                  SizedBox(
+                    height: 24.h,
                   ),
 
                   //deleteTask
                   SizedBox(
-                    height: 48,
-                    width: double.infinity,
+                    height: 48.h,
+                    width: double.infinity.w,
                     child: CustomElevatedButton(
                       text: AppStrings.deleteTask,
                       color: AppColors.red,
@@ -266,13 +266,13 @@ class TaskComponent extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 24,
+                  SizedBox(
+                    height: 24.h,
                   ),
                   //cancel
                   SizedBox(
-                    height: 48,
-                    width: double.infinity,
+                    height: 48.h,
+                    width: double.infinity.w,
                     child: CustomElevatedButton(
                       text: AppStrings.cancel,
                       onPressed: () {
@@ -287,11 +287,11 @@ class TaskComponent extends StatelessWidget {
         );
       },
       child: Container(
-        height: 140,
+        height: 140.h,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: getColor(taskModel.color),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         margin: const EdgeInsets.only(bottom: 16),
         child: Row(
@@ -306,7 +306,7 @@ class TaskComponent extends StatelessWidget {
                     taskModel.title,
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
 
                   //row
                   Row(
@@ -316,14 +316,14 @@ class TaskComponent extends StatelessWidget {
                         Icons.timer,
                         color: AppColors.white,
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Text(
                         '${taskModel.startTime} - ${taskModel.endTime}',
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   //note
                   Text(
                     taskModel.note,
@@ -335,8 +335,8 @@ class TaskComponent extends StatelessWidget {
 
             //divider
             Container(
-              height: 75,
-              width: 1,
+              height: 75.h,
+              width: 1.w,
               color: Colors.white,
               margin: const EdgeInsets.only(right: 10),
             ),

@@ -5,6 +5,9 @@ import '../utils/app_colors.dart';
 
 ThemeData getAppDarkTheme() {
   return ThemeData(
+    //brightness
+    brightness: Brightness.dark,
+    //primary color
     primaryColor: AppColors.primary,
     //scaffoldBackgroundColor
     scaffoldBackgroundColor: AppColors.background,
@@ -31,15 +34,23 @@ ThemeData getAppDarkTheme() {
     ),
     //button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8)))),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        textStyle: GoogleFonts.lato(
+          color: AppColors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
         //enabled border
         enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        //fouced border
+        //focused border
         focusedBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         //hint
@@ -53,8 +64,9 @@ ThemeData getAppDarkTheme() {
   );
 }
 
-ThemeData getAppTheme() {
+ThemeData getAppLightTheme() {
   return ThemeData(
+    brightness: Brightness.light,
     primaryColor: AppColors.primary,
     //scaffoldBackgroundColor
     scaffoldBackgroundColor: AppColors.white,
@@ -81,9 +93,27 @@ ThemeData getAppTheme() {
     ),
     //button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4)))),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+        //enabled border
+        enabledBorder:
+            OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        //focused border
+        focusedBorder:
+            OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        //hint
+        hintStyle: GoogleFonts.lato(
+          color: AppColors.background,
+          fontSize: 16,
+        ),
+        //fill color
+        fillColor: AppColors.white,
+        filled: true),
   );
 }

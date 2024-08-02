@@ -21,7 +21,7 @@ class ToDoApp extends StatelessWidget {
             builder: (context, state) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                theme: getAppTheme(),
+                theme: getAppLightTheme(),
                 darkTheme: getAppDarkTheme(),
                 themeMode: BlocProvider.of<TaskCubit>(context).isDark
                     ? ThemeMode.dark

@@ -41,7 +41,7 @@ class AddTaskScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24.0),
             child: BlocConsumer<TaskCubit, TaskState>(
               listener: (context, state) {
-                if (state is InsertTaskSucessState) {
+                if (state is InsertTaskSuccessState) {
                   showToast(
                       message: AppStrings.taskAdded,
                       state: ToastStates.success);

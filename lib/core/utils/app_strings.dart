@@ -1,6 +1,6 @@
 class AppStrings {
   //splash screen
-  static const String appName = 'UpTodo';
+  static const String appName = 'TaskMate';
   //onboarding screen
   static const String skip = 'SKIP';
   static const String next = 'NEXT';
@@ -9,11 +9,11 @@ class AppStrings {
 
   static const String onBoardingTitleOne = 'Manage your tasks';
   static const String onBoardingSubTitleOne =
-      'You can easily manage all of your daily tasks in DoMe for free';
+      'You can easily manage all of your daily tasks in TaskMate for free';
 
   static const String onBoardingTitleTwo = 'Create daily routine';
   static const String onBoardingSubTitleTwo =
-      'In Uptodo  you can create your personalized routine to stay productive';
+      'In TaskMate  you can create your personalized routine to stay productive';
   static const String onBoardingTitleThree = 'Organize your tasks';
   static const String onBoardingSubTitleThree =
       'You can organize your daily tasks by adding your tasks into separate categories';

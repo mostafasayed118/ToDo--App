@@ -6,7 +6,8 @@ import 'package:todo_app/core/utils/app_assets.dart';
 import 'package:todo_app/core/utils/app_colors.dart';
 import 'package:todo_app/core/utils/app_strings.dart';
 import 'package:todo_app/features/auth/presentation/screens/on_boarding_screen/on_boarding_screen.dart';
-import 'package:todo_app/features/task/presentation/screens/home_page/home_page_screen.dart';
+
+import '../../../../task/presentation/screens/home_page/home_page_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,21 +20,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    navigator();
+
+    navigatorWithFuture();
   }
 
 //presentation
-  void navigator() {
-    bool isVisted =
+  void navigatorWithFuture() {
+    bool isVisited =
         sl<CacheHelper>().getData(key: AppStrings.onboardingKey) ?? false;
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return isVisted ? const HomePageScreen() : OnBoardingScreen();
+              return isVisited ? const HomePageScreen() : OnBoardingScreen();
             },
           ),
         );

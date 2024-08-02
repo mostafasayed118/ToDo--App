@@ -4,17 +4,17 @@ class TaskInitial extends TaskState {}
 
 class GetDateLoadingState extends TaskState {}
 
-class GetDateSucessState extends TaskState {}
+class GetDateSuccessState extends TaskState {}
 
 class GetDateErrorState extends TaskState {}
 
 class GetStartTimeLoadingState extends TaskState {}
 
-class GetStartTimeSucessState extends TaskState {}
+class GetStartTimeSuccessState extends TaskState {}
 
 class GetStartTimeErrorState extends TaskState {}
 
-class GetSelectedDateSucessState extends TaskState {}
+class GetSelectedDateSuccessState extends TaskState {}
 
 class GetSelectedDateLoadingState extends TaskState {}
 
@@ -24,7 +24,7 @@ class GetThemeState extends TaskState {}
 
 class GetEndTimeLoadingState extends TaskState {}
 
-class GetEndTimeSucessState extends TaskState {}
+class GetEndTimeSuccessState extends TaskState {}
 
 class GetEndTimeErrorState extends TaskState {}
 
@@ -32,7 +32,7 @@ class ChangeCheckMarkIndexState extends TaskState {}
 
 class InsertTaskLoadingState extends TaskState {}
 
-class InsertTaskSucessState extends TaskState {}
+class InsertTaskSuccessState extends TaskState {}
 
 class InsertTaskErrorState extends TaskState {}
 
@@ -44,12 +44,12 @@ class GetTaskErrorState extends TaskState {}
 
 class UpdateTaskLoadingState extends TaskState {}
 
-class UpdateTaskSucessState extends TaskState {}
+class UpdateTaskSuccessState extends TaskState {}
 
 class UpdateTaskErrorState extends TaskState {}
 
 class DeleteTaskLoadingState extends TaskState {}
 
-class DeleteTaskSucessState extends TaskState {}
+class DeleteTaskSuccessState extends TaskState {}
 
 class DeleteTaskErrorState extends TaskState {}
