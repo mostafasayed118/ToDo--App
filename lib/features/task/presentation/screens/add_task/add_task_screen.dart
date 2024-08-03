@@ -30,7 +30,13 @@ class AddTaskScreen extends StatelessWidget {
           centerTitle: false,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.white),
+            icon: Icon(
+              Icons.arrow_back,
+              color: BlocProvider.of<TaskCubit>(context).isDark
+                  ? AppColors.white
+                  : AppColors.background,
+              size: 35.h,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -66,6 +72,12 @@ class AddTaskScreen extends StatelessWidget {
                           return null;
                         },
                         hintText: AppStrings.titleHint,
+                        suffixIcon: Icon(
+                          Icons.title_outlined,
+                          color: BlocProvider.of<TaskCubit>(context).isDark
+                              ? AppColors.white
+                              : AppColors.background,
+                        ),
                       ),
                       SizedBox(height: 24.h),
                       //! Note
@@ -79,6 +91,12 @@ class AddTaskScreen extends StatelessWidget {
                           return null;
                         },
                         hintText: AppStrings.noteHint,
+                        suffixIcon: Icon(
+                          Icons.note_alt_outlined,
+                          color: BlocProvider.of<TaskCubit>(context).isDark
+                              ? AppColors.white
+                              : AppColors.background,
+                        ),
                       ),
                       SizedBox(height: 24.h),
                       //! Date
@@ -92,9 +110,11 @@ class AddTaskScreen extends StatelessWidget {
                           onPressed: () async {
                             taskCubit.getDate(context);
                           },
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.calendar_month,
-                            color: AppColors.white,
+                            color: BlocProvider.of<TaskCubit>(context).isDark
+                                ? AppColors.white
+                                : AppColors.background,
                           ),
                         ),
                       ),
@@ -112,9 +132,12 @@ class AddTaskScreen extends StatelessWidget {
                                 onPressed: () async {
                                   taskCubit.getStartTime(context);
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.timer_outlined,
-                                  color: AppColors.white,
+                                  color:
+                                      BlocProvider.of<TaskCubit>(context).isDark
+                                          ? AppColors.white
+                                          : AppColors.background,
                                 ),
                               ),
                             ),
@@ -130,9 +153,12 @@ class AddTaskScreen extends StatelessWidget {
                                 onPressed: () async {
                                   taskCubit.getEndTime(context);
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.timer_outlined,
-                                  color: AppColors.white,
+                                  color:
+                                      BlocProvider.of<TaskCubit>(context).isDark
+                                          ? AppColors.white
+                                          : AppColors.background,
                                 ),
                               ),
                             ),

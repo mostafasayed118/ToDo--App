@@ -33,15 +33,19 @@ class HomePageScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      //! Date
                       Text(DateFormat.yMMMMd().format(DateTime.now()),
                           style: Theme.of(context).textTheme.displayLarge),
                       const Spacer(),
+                      //! Theme Icon and Change Theme
                       IconButton(
                         onPressed: () {
                           BlocProvider.of<TaskCubit>(context).changeTheme();
                         },
                         icon: Icon(
-                          Icons.mode_night,
+                          BlocProvider.of<TaskCubit>(context).isDark
+                              ? Icons.light_mode
+                              : Icons.dark_mode,
                           color: BlocProvider.of<TaskCubit>(context).isDark
                               ? AppColors.white
                               : AppColors.background,
@@ -52,6 +56,7 @@ class HomePageScreen extends StatelessWidget {
                   SizedBox(
                     height: 12.h,
                   ),
+                  //! Today
                   Text(AppStrings.today,
                       style: Theme.of(context).textTheme.displayLarge),
                   SizedBox(
@@ -66,15 +71,21 @@ class HomePageScreen extends StatelessWidget {
                     selectedTextColor: AppColors.white,
                     dateTextStyle:
                         Theme.of(context).textTheme.displaySmall!.copyWith(
-                              color: AppColors.white.withOpacity(0.87),
+                              color: BlocProvider.of<TaskCubit>(context).isDark
+                                  ? AppColors.white.withOpacity(0.87)
+                                  : AppColors.background,
                             ),
                     dayTextStyle:
                         Theme.of(context).textTheme.displaySmall!.copyWith(
-                              color: AppColors.white.withOpacity(0.87),
+                              color: BlocProvider.of<TaskCubit>(context).isDark
+                                  ? AppColors.white.withOpacity(0.87)
+                                  : AppColors.background,
                             ),
                     monthTextStyle:
                         Theme.of(context).textTheme.displaySmall!.copyWith(
-                              color: AppColors.white.withOpacity(0.87),
+                              color: BlocProvider.of<TaskCubit>(context).isDark
+                                  ? AppColors.white.withOpacity(0.87)
+                                  : AppColors.background,
                             ),
                     onDateChange: (date) {
                       // New date selected
@@ -170,6 +181,7 @@ class HomePageScreen extends StatelessWidget {
     );
   }
 
+//! No Task Widget
   Center noTasksWidget(BuildContext context) {
     return Center(
       child: Column(
@@ -229,11 +241,11 @@ class TaskComponent extends StatelessWidget {
           builder: (context) {
             return Container(
               padding: const EdgeInsets.all(24),
-              height: 240.h,
+              height: 250.h,
               color: AppColors.deepGrey,
               child: Column(
                 children: [
-                  //taskCompleted
+                  //! taskCompleted
                   taskModel.isCompleted == 1
                       ? Container()
                       : SizedBox(
@@ -287,7 +299,7 @@ class TaskComponent extends StatelessWidget {
         );
       },
       child: Container(
-        height: 140.h,
+        height: 143.h,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: getColor(taskModel.color),
@@ -301,33 +313,50 @@ class TaskComponent extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //title
+                  //! title
                   Text(
                     taskModel.title,
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                        color: BlocProvider.of<TaskCubit>(context).isDark
+                            ? AppColors.white
+                            : AppColors.white,
+                        fontSize: 26.sp),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 8.h),
 
-                  //row
+                  //! row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Icon(
-                        Icons.timer,
+                        Icons.timer_sharp,
                         color: AppColors.white,
                       ),
                       SizedBox(width: 8.w),
                       Text(
                         '${taskModel.startTime} - ${taskModel.endTime}',
-                        style: Theme.of(context).textTheme.displayMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(
+                              color: BlocProvider.of<TaskCubit>(context).isDark
+                                  ? AppColors.white
+                                  : AppColors.white,
+                            ),
                       ),
                     ],
                   ),
                   SizedBox(height: 8.h),
-                  //note
+                  //! note
                   Text(
                     taskModel.note,
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                        color: BlocProvider.of<TaskCubit>(context).isDark
+                            ? AppColors.white
+                            : AppColors.white,
+                        fontSize: 24.sp),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -348,7 +377,11 @@ class TaskComponent extends StatelessWidget {
                 taskModel.isCompleted == 1
                     ? AppStrings.complete
                     : AppStrings.todo,
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                      color: BlocProvider.of<TaskCubit>(context).isDark
+                          ? AppColors.white
+                          : AppColors.white,
+                    ),
               ),
             )
           ],

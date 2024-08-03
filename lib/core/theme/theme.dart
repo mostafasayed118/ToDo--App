@@ -53,13 +53,21 @@ ThemeData getAppDarkTheme() {
         //focused border
         focusedBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+
         //hint
         hintStyle: GoogleFonts.lato(
           color: AppColors.white,
           fontSize: 16,
         ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: AppColors.red,
+            width: 1,
+          ),
+        ),
         //fill color
-        fillColor: AppColors.lightBlack,
+        fillColor: AppColors.deepGrey,
         filled: true),
   );
 }
@@ -111,6 +119,13 @@ ThemeData getAppLightTheme() {
         hintStyle: GoogleFonts.lato(
           color: AppColors.background,
           fontSize: 16,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: AppColors.red,
+            width: 1,
+          ),
         ),
         //fill color
         fillColor: AppColors.white,
