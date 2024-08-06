@@ -21,13 +21,13 @@ class ToDoApp extends StatelessWidget {
             builder: (context, state) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
+                title: AppStrings.appName,
+                home: const SplashScreen(),
                 theme: getAppLightTheme(),
                 darkTheme: getAppDarkTheme(),
                 themeMode: BlocProvider.of<TaskCubit>(context).isDark
                     ? ThemeMode.dark
                     : ThemeMode.light,
-                title: AppStrings.appName,
-                home: const SplashScreen(),
               );
             },
           );
