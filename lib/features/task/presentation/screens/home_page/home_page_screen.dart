@@ -102,59 +102,9 @@ class HomePageScreen extends StatelessWidget {
                                 .tasksList
                                 .length,
                             itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return Container(
-                                        height: 240.h,
-                                        width: double.infinity.w,
-                                        padding: const EdgeInsets.all(24),
-                                        color: AppColors.deepGrey,
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 48.h,
-                                              width: double.infinity.w,
-                                              child: CustomElevatedButton(
-                                                  color: AppColors.primary,
-                                                  onPressed: () {},
-                                                  text:
-                                                      AppStrings.taskCompleted),
-                                            ),
-                                            SizedBox(
-                                              height: 24.h,
-                                            ),
-                                            SizedBox(
-                                              height: 48.h,
-                                              width: double.infinity.w,
-                                              child: CustomElevatedButton(
-                                                  color: AppColors.red,
-                                                  onPressed: () {},
-                                                  text: AppStrings.deleteTask),
-                                            ),
-                                            SizedBox(
-                                              height: 24.h,
-                                            ),
-                                            SizedBox(
-                                              height: 48.h,
-                                              width: double.infinity.w,
-                                              child: CustomElevatedButton(
-                                                  color: AppColors.primary,
-                                                  onPressed: () {},
-                                                  text: AppStrings.cancel),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: TaskComponent(
-                                  taskModel: BlocProvider.of<TaskCubit>(context)
-                                      .tasksList[index],
-                                ),
+                              return TaskComponent(
+                                taskModel: BlocProvider.of<TaskCubit>(context)
+                                    .tasksList[index],
                               );
                             },
                           ),
@@ -245,6 +195,7 @@ class TaskComponent extends StatelessWidget {
               child: Column(
                 children: [
                   //! taskCompleted
+
                   taskModel.isCompleted == 1
                       ? Container()
                       : SizedBox(
@@ -263,7 +214,7 @@ class TaskComponent extends StatelessWidget {
                     height: 24.h,
                   ),
 
-                  //deleteTask
+                  //! deleteTask
                   SizedBox(
                     height: 48.h,
                     width: double.infinity.w,
@@ -313,6 +264,7 @@ class TaskComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //! title
+
                   Text(
                     taskModel.title,
                     style: Theme.of(context).textTheme.displayLarge!.copyWith(
@@ -324,7 +276,8 @@ class TaskComponent extends StatelessWidget {
                   ),
                   SizedBox(height: 8.h),
 
-                  //! row
+                  //! startTime - endTime
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -347,7 +300,9 @@ class TaskComponent extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 8.h),
+
                   //! note
+
                   Text(
                     taskModel.note,
                     style: Theme.of(context).textTheme.displayMedium!.copyWith(
@@ -361,14 +316,15 @@ class TaskComponent extends StatelessWidget {
               ),
             ),
 
-            //divider
+            //! divider
+
             Container(
               height: 75.h,
               width: 1.w,
               color: Colors.white,
               margin: const EdgeInsets.only(right: 10),
             ),
-            // const SizedBox(width: 10,),
+
             //text
             RotatedBox(
               quarterTurns: 3,

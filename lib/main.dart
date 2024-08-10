@@ -16,9 +16,7 @@ void main() async {
   sl<SqfliteHelper>().initDB();
   runApp(
     BlocProvider(
-      create: (context) => TaskCubit()
-        ..getTheme()
-        ..getTasks(),
+      create: (context) => TaskCubit()..getTasks(),
       child: const ToDoApp(),
     ),
   );

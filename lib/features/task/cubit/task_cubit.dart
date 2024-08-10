@@ -166,7 +166,7 @@ class TaskCubit extends Cubit<TaskState> {
     });
   }
 
-  //update Task
+  //! update Task
   void updateTask(id) async {
     emit(UpdateTaskLoadingState());
 
@@ -179,7 +179,7 @@ class TaskCubit extends Cubit<TaskState> {
     });
   }
 
-//delete task
+//! delete task
   void deleteTask(id) async {
     emit(DeleteTaskLoadingState());
 
