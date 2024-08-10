@@ -50,6 +50,11 @@ class AppStrings {
 
   static const String taskDeleted = 'Task deleted successfully';
 
-  static const String taskUpdated = 'Task updated successfully';
+  static const String taskUpdated = 'Task Completed successfully';
+
+  static const String taskAddedSuccess = 'Task added successfully';
+
+  static const String taskDeletedSuccess = 'Task deleted successfully';
+  static const String taskUpdatedError = 'Task updated failed';
   static const String taskAddedError = 'Task added failed';
 }

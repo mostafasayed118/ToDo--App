@@ -25,7 +25,27 @@ class HomePageScreen extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: BlocBuilder<TaskCubit, TaskState>(
+          child: BlocConsumer<TaskCubit, TaskState>(
+            listener: (context, state) {
+              if (state is UpdateTaskSuccessState) {
+                log('UpdateTaskSuccessState');
+                showToast(
+                    message: AppStrings.taskUpdated,
+                    state: ToastStates.success);
+              }
+              if (state is UpdateTaskErrorState) {
+                log('UpdateTaskErrorState');
+                showToast(
+                    message: AppStrings.taskUpdatedError,
+                    state: ToastStates.error);
+              }
+              if (state is DeleteTaskSuccessState) {
+                log('DeleteTaskSuccessState');
+                showToast(
+                    message: AppStrings.taskDeleted,
+                    state: ToastStates.success);
+              }
+            },
             builder: (context, state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,10 +53,13 @@ class HomePageScreen extends StatelessWidget {
                   Row(
                     children: [
                       //! Date
+
                       Text(DateFormat.yMMMMd().format(DateTime.now()),
                           style: Theme.of(context).textTheme.displayLarge),
                       const Spacer(),
+
                       //! Theme Icon and Change Theme
+
                       IconButton(
                         onPressed: () {
                           BlocProvider.of<TaskCubit>(context).changeTheme();
@@ -55,7 +78,9 @@ class HomePageScreen extends StatelessWidget {
                   SizedBox(
                     height: 12.h,
                   ),
+
                   //! Today
+
                   Text(AppStrings.today,
                       style: Theme.of(context).textTheme.displayLarge),
                   SizedBox(
@@ -88,6 +113,7 @@ class HomePageScreen extends StatelessWidget {
                             ),
                     onDateChange: (date) {
                       // New date selected
+                      BlocProvider.of<TaskCubit>(context).getSelectedDate(date);
                       log(date.toString());
                     },
                   ),
@@ -215,6 +241,7 @@ class TaskComponent extends StatelessWidget {
                   ),
 
                   //! deleteTask
+
                   SizedBox(
                     height: 48.h,
                     width: double.infinity.w,
