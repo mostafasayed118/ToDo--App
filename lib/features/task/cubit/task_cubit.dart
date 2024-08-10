@@ -82,7 +82,8 @@ class TaskCubit extends Cubit<TaskState> {
       emit(GetEndTimeErrorState());
     }
   }
-  //! Change CheckMarkIndex 
+
+  //! Change CheckMarkIndex
   Color getColor(index) {
     switch (index) {
       case 0:
@@ -102,10 +103,13 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
+  //! Change CheckMarkIndex
   void changeCheckMarkIndex(index) {
     currentIndex = index;
     emit(ChangeCheckMarkIndexState());
   }
+
+  //! get Selected Date
 
   void getSelectedDate(date) {
     emit(GetSelectedDateLoadingState());
@@ -115,11 +119,14 @@ class TaskCubit extends Cubit<TaskState> {
     getTasks();
   }
 
+  //! Insert Task
+
   List<TaskModel> tasksList = [];
   void insertTask() async {
     emit(InsertTaskLoadingState());
 
     try {
+      await Future.delayed(const Duration(seconds: 2));
       await sl<SqfliteHelper>().insertToDB(
         TaskModel(
           date: DateFormat.yMd().format(currentDate),

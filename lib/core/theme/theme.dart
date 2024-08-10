@@ -5,18 +5,27 @@ import '../utils/app_colors.dart';
 
 ThemeData getAppDarkTheme() {
   return ThemeData(
-    //brightness
+    //! brightness
+
     brightness: Brightness.dark,
-    //primary color
+
+    //! primary color
+
     primaryColor: AppColors.primary,
-    //scaffoldBackgroundColor
+
+    //! scaffoldBackgroundColor
+
     scaffoldBackgroundColor: AppColors.background,
-    //appBar theme
+
+    //! appBar theme
+
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.background,
       centerTitle: true,
     ),
-    //text theme
+
+    //! text theme
+
     textTheme: TextTheme(
       displayLarge: GoogleFonts.lato(
         color: AppColors.white,
@@ -32,7 +41,9 @@ ThemeData getAppDarkTheme() {
         fontSize: 16,
       ),
     ),
-    //button theme
+
+    //! elevatedButton theme
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
@@ -46,19 +57,29 @@ ThemeData getAppDarkTheme() {
         ),
       ),
     ),
+
+    //! input decoration theme
     inputDecorationTheme: InputDecorationTheme(
-        //enabled border
+
+        //! enabled border
+
         enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        //focused border
+
+        //! focused border
+
         focusedBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
 
-        //hint
+        //! hint
+
         hintStyle: GoogleFonts.lato(
           color: AppColors.white,
           fontSize: 16,
         ),
+
+        //! errorBorder
+
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(
@@ -66,7 +87,19 @@ ThemeData getAppDarkTheme() {
             width: 1,
           ),
         ),
-        //fill color
+
+        //! focusedErrorBorder
+
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: AppColors.red,
+            width: 1,
+          ),
+        ),
+
+        //! fill color
+
         fillColor: AppColors.deepGrey,
         filled: true),
   );
@@ -74,16 +107,25 @@ ThemeData getAppDarkTheme() {
 
 ThemeData getAppLightTheme() {
   return ThemeData(
+    //! brightness
     brightness: Brightness.light,
+
+    //! primary color
     primaryColor: AppColors.primary,
-    //scaffoldBackgroundColor
+
+    //! scaffoldBackgroundColor
+
     scaffoldBackgroundColor: AppColors.white,
-    //appBar theme
+
+    //! appBar theme
+
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.white,
       centerTitle: true,
     ),
-    //text theme
+
+    //! text theme
+
     textTheme: TextTheme(
       displayLarge: GoogleFonts.lato(
         color: AppColors.background,
@@ -99,7 +141,9 @@ ThemeData getAppLightTheme() {
         fontSize: 16,
       ),
     ),
-    //button theme
+
+    //! elevatedButton theme
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
@@ -108,18 +152,30 @@ ThemeData getAppLightTheme() {
         ),
       ),
     ),
+
+    //! input decoration theme
+
     inputDecorationTheme: InputDecorationTheme(
-        //enabled border
+
+        //! enabled border
+
         enabledBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        //focused border
+
+        //! focused border
+
         focusedBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        //hint
+
+        //! hint
+
         hintStyle: GoogleFonts.lato(
           color: AppColors.background,
           fontSize: 16,
         ),
+
+        //! errorBorder
+
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(
@@ -127,7 +183,19 @@ ThemeData getAppLightTheme() {
             width: 1,
           ),
         ),
-        //fill color
+
+        //! focusedErrorBorder
+
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: AppColors.red,
+            width: 1,
+          ),
+        ),
+
+        //! fill color
+
         fillColor: AppColors.white,
         filled: true),
   );

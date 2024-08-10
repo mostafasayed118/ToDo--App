@@ -29,7 +29,6 @@ class HomePageScreen extends StatelessWidget {
             builder: (context, state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     children: [

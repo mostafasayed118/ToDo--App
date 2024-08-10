@@ -43,6 +43,7 @@ class AppStrings {
   static const String onboardingKey = 'onboarding';
 
   static const String titleError = 'Please enter title';
+
   static const String noteError = 'Please enter note';
 
   static const String taskAdded = 'Task added successfully';
@@ -50,4 +51,5 @@ class AppStrings {
   static const String taskDeleted = 'Task deleted successfully';
 
   static const String taskUpdated = 'Task updated successfully';
+  static const String taskAddedError = 'Task added failed';
 }

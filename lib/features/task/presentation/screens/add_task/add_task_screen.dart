@@ -53,6 +53,11 @@ class AddTaskScreen extends StatelessWidget {
                       state: ToastStates.success);
                   Navigator.pop(context);
                 }
+                if (state is InsertTaskErrorState) {
+                  showToast(
+                      message: AppStrings.taskAddedError,
+                      state: ToastStates.error);
+                }
               },
               builder: (context, state) {
                 final taskCubit = BlocProvider.of<TaskCubit>(context);
@@ -168,44 +173,44 @@ class AddTaskScreen extends StatelessWidget {
                       SizedBox(height: 24.h),
                       //! Colors
                       SizedBox(
-                          height: 68.h,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppStrings.colors,
-                                style:
-                                    Theme.of(context).textTheme.displayMedium,
-                              ),
-                              SizedBox(height: 8.h),
-                              Expanded(
-                                child: ListView.separated(
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          taskCubit.changeCheckMarkIndex(index);
-                                        },
-                                        child: CircleAvatar(
-                                          backgroundColor:
-                                              taskCubit.getColor(index),
-                                          radius: 20.r,
-                                          child: index == taskCubit.currentIndex
-                                              ? const Icon(
-                                                  Icons.check,
-                                                  color: AppColors.white,
-                                                )
-                                              : null,
-                                        ),
-                                      );
-                                    },
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(width: 18.w),
-                                    itemCount: 6),
-                              ),
-                            ],
-                          )),
-
+                        height: 68.h,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.colors,
+                              style: Theme.of(context).textTheme.displayMedium,
+                            ),
+                            SizedBox(height: 8.h),
+                            Expanded(
+                              child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        taskCubit.changeCheckMarkIndex(index);
+                                      },
+                                      child: CircleAvatar(
+                                        backgroundColor:
+                                            taskCubit.getColor(index),
+                                        radius: 20.r,
+                                        child: index == taskCubit.currentIndex
+                                            ? const Icon(
+                                                Icons.check,
+                                                color: AppColors.white,
+                                              )
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(width: 18.w),
+                                  itemCount: 6),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 90.h),
                       state is InsertTaskLoadingState
                           ? const Center(
                               child: CircularProgressIndicator(
@@ -213,19 +218,21 @@ class AddTaskScreen extends StatelessWidget {
                                 // strokeWidth: 3,
                               ),
                             )
-                          : SizedBox(height: 120.h),
-                      //! Cerate Task Button
-                      SizedBox(
-                        height: 48.h,
-                        width: double.infinity,
-                        child: CustomElevatedButton(
-                            onPressed: () {
-                              if (taskCubit.formKey.currentState!.validate()) {
-                                taskCubit.insertTask();
-                              }
-                            },
-                            text: AppStrings.createTask),
-                      )
+                          :
+                          //! Cerate Task Button
+                          SizedBox(
+                              height: 48.h,
+                              width: double.infinity,
+                              child: CustomElevatedButton(
+                                onPressed: () {
+                                  if (taskCubit.formKey.currentState!
+                                      .validate()) {
+                                    taskCubit.insertTask();
+                                  }
+                                },
+                                text: AppStrings.createTask,
+                              ),
+                            )
                     ],
                   ),
                 );
