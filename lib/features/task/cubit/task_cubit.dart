@@ -148,7 +148,7 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
-//!get Tasks
+//! get Tasks
   void getTasks() async {
     emit(GetDateLoadingState());
     await sl<SqfliteHelper>().getFromDB().then((value) {
@@ -170,7 +170,7 @@ class TaskCubit extends Cubit<TaskState> {
   void updateTask(id) async {
     emit(UpdateTaskLoadingState());
 
-    await sl<SqfliteHelper>().updatedDB(id).then((value) {
+    await sl<SqfliteHelper>().updateDB(id).then((value) {
       emit(UpdateTaskSuccessState());
       getTasks();
     }).catchError((e) {

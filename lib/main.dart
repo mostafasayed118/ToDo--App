@@ -13,7 +13,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await setup();
   await sl<CacheHelper>().init();
-  sl<SqfliteHelper>().intiDB();
+  sl<SqfliteHelper>().initDB();
   runApp(
     BlocProvider(
       create: (context) => TaskCubit()
