@@ -12,7 +12,11 @@ import '../../../core/services/service.locator.dart';
 import '../data/model/task_model.dart';
 
 class TaskCubit extends Cubit<TaskState> {
-  TaskCubit() : super(TaskInitial());
+  bool isDark = false;
+
+  TaskCubit() : super(TaskInitial()) {
+    getTheme();
+  }
   DateTime currentDate = DateTime.now();
   DateTime selectedDate = DateTime.now();
   String startTime = DateFormat('hh:mm a').format(DateTime.now());
@@ -192,7 +196,6 @@ class TaskCubit extends Cubit<TaskState> {
     });
   }
 
-  bool isDark = false;
   void changeTheme() async {
     isDark = !isDark;
     await sl<CacheHelper>().saveData(key: 'isDark', value: isDark);
@@ -200,7 +203,12 @@ class TaskCubit extends Cubit<TaskState> {
   }
 
   void getTheme() async {
-    isDark = await sl<CacheHelper>().getData(key: 'isDark');
-    emit(GetThemeState());
+    final savedTheme = await sl<CacheHelper>().getData(key: 'isDark');
+    if (savedTheme != null && savedTheme is bool) {
+      isDark = savedTheme;
+    } else {
+      isDark = true; // Default value if no theme is saved
+    }
+    emit(ChangeThemeState());
   }
 }

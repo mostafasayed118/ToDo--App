@@ -1,7 +1,7 @@
 class AppStrings {
-  //splash screen
+  //! splash screen
   static const String appName = 'TaskMate';
-  //onboarding screen
+  //! onboarding screen
   static const String skip = 'SKIP';
   static const String next = 'NEXT';
   static const String back = 'BACK';
@@ -17,11 +17,11 @@ class AppStrings {
   static const String onBoardingTitleThree = 'Organize your tasks';
   static const String onBoardingSubTitleThree =
       'You can organize your daily tasks by adding your tasks into separate categories';
-//home screen
+//! home screen
   static const String today = 'Today';
   static const String noTaskTitle = 'What do you want to do today?';
   static const String noTaskSubTitle = 'Tap + to add your tasks';
-  //add task screen
+  //! add task screen
   static const String addTask = 'Add Task';
   static const String title = 'Title';
   static const String titleHint = 'Enter title here';
@@ -32,14 +32,19 @@ class AppStrings {
   static const String endTime = 'End Time';
   static const String colors = 'Colors';
   static const String createTask = 'Create Task';
-//edit task screen
+//! edit task screen
   static const String todo = 'TODO';
   static const String complete = 'COMPLETE';
   static const String taskCompleted = 'Task Completed ';
   static const String deleteTask = 'Delete Task';
   static const String cancel = 'Cancel';
 
-  // global
+//! Notification
+  static const String notificationTitle = 'Write Your Tasks For Tomorrow';
+
+  static const String notificationBody = 'Have a Productive Day';
+
+  //! global
   static const String onboardingKey = 'onboarding';
 
   static const String titleError = 'Please enter title';

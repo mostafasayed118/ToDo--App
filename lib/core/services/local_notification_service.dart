@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:todo_app/core/utils/app_strings.dart';
 
 class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -149,7 +150,7 @@ class LocalNotificationService {
       currentTimeZone.month,
       currentTimeZone.day,
       currentTimeZone.hour,
-      30,
+      22,
     );
     log(" scheduleTimeZone.year ${scheduleTime.year}");
     log(" scheduleTimeZone.month ${scheduleTime.month}");
@@ -159,7 +160,7 @@ class LocalNotificationService {
     log(" scheduleTimeZone.second ${scheduleTime.second}");
     log("___________________________________________");
     if (scheduleTime.isBefore(currentTimeZone)) {
-      scheduleTime = scheduleTime.add(const Duration(minutes: 28));
+      scheduleTime = scheduleTime.add(const Duration(days: 1));
       log(" scheduleTimeZone.after ${scheduleTime.year}");
       log(" scheduleTimeZone.after ${scheduleTime.month}");
       log(" scheduleTimeZone.after ${scheduleTime.day}");
@@ -170,8 +171,8 @@ class LocalNotificationService {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       4,
-      'Daily Scheduled Notification',
-      'This is a Daily Scheduled Notification',
+      AppStrings.notificationTitle,
+      AppStrings.notificationBody,
       scheduleTime, //!  working
       notificationDetails,
       payload: 'Daily Scheduled Notification',
