@@ -7,6 +7,9 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:todo_app/core/utils/app_strings.dart';
 
+import '../../features/task/data/model/notification_model.dart';
+import '../../features/task/data/model/task_model.dart';
+
 class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -55,7 +58,8 @@ class LocalNotificationService {
   }
 
 //! Repeated Notification
-  static void showRepeatedNotification() async {
+  static void showRepeatedNotification(
+      {required NotificationModel notification}) async {
     NotificationDetails notificationDetails = const NotificationDetails(
       android: AndroidNotificationDetails(
         'id 2',
@@ -75,12 +79,24 @@ class LocalNotificationService {
       'This is a Repeated Notification',
       RepeatInterval.everyMinute,
       notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.exact,
       payload: 'Repeated Notification',
     );
   }
 
 //! Scheduled Notification
-  static void showScheduledNotification() async {
+  static void showScheduledNotification(
+      {required DateTime currentDate,
+      required TimeOfDay scheduleTime,
+      required TaskModel taskModel}) async {
+    if (taskModel.id == null) {
+      log('Task id is null');
+      try {
+        await flutterLocalNotificationsPlugin.cancel(taskModel.id!);
+      } catch (e) {
+        log(e.toString());
+      }
+    }
     NotificationDetails notificationDetails = const NotificationDetails(
       android: AndroidNotificationDetails(
         'id 3',
@@ -106,13 +122,21 @@ class LocalNotificationService {
     // log("After ${tz.TZDateTime.now(tz.local).hour}");
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      3,
-      'Scheduled Notification',
-      'This is a  Scheduled Notification',
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)), //! Working
-      // tz.TZDateTime(tz.local, 2024, DateTime.august, 12, 18, 28), //! not working
+      androidScheduleMode: AndroidScheduleMode.exact,
+      taskModel.id!,
+      taskModel.title,
+      taskModel.note,
+      // tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)), //! Working
+      tz.TZDateTime(
+        tz.local,
+        currentDate.year,
+        currentDate.month,
+        currentDate.day,
+        scheduleTime.hour,
+        scheduleTime.minute,
+      ).subtract(const Duration(minutes: 1)), //!  working
       notificationDetails,
-      payload: 'Scheduled Notification',
+      payload: ' ${taskModel.title} +' '+ ${taskModel.note}',
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
@@ -178,6 +202,7 @@ class LocalNotificationService {
       payload: 'Daily Scheduled Notification',
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
+      androidScheduleMode: AndroidScheduleMode.exact,
     );
   }
 

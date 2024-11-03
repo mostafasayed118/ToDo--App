@@ -57,6 +57,7 @@ class SqfliteHelper {
       throw Exception('Database is not initialized');
     }
     return await _db!.insert('Tasks', {
+      'id': model.id,
       'title': model.title,
       'note': model.note,
       'date': model.date,

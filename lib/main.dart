@@ -11,11 +11,12 @@ import 'package:todo_app/features/task/cubit/task_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await CacheHelper().init();
   Bloc.observer = MyBlocObserver();
   await setup();
   await sl<CacheHelper>().init();
   await sl<SqfliteHelper>().initDB();
+
+//! to ensure that all services are initialized before the app starts
   await Future.wait([
     LocalNotificationService.init(),
     WorkManagerService().init(),

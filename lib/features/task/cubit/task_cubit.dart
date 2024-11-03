@@ -3,12 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/core/services/local_notification_service.dart';
 import 'package:todo_app/features/task/cubit/task_state.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../core/database/cache/cache_helper.dart';
 import '../../../core/database/sqflite_helper/sqflite_helper.dart';
 import '../../../core/services/service.locator.dart';
+import '../data/model/notification_model.dart';
 import '../data/model/task_model.dart';
 
 class TaskCubit extends Cubit<TaskState> {
@@ -28,7 +30,22 @@ class TaskCubit extends Cubit<TaskState> {
   TextEditingController noteController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  //!get Date From User
+  List<NotificationModel> notificationList = [
+    NotificationModel(
+      title: 'Notification 1',
+      body: 'Notification 1 body',
+    ),
+    NotificationModel(
+      title: 'Notification 2',
+      body: 'Notification 2 body',
+    ),
+    NotificationModel(
+      title: 'Notification 3',
+      body: 'Notification 3 body',
+    ),
+  ];
+
+  //! get Date From User
   void getDate(context) async {
     emit(GetDateLoadingState());
     DateTime? pickedDate = await showDatePicker(
@@ -126,6 +143,7 @@ class TaskCubit extends Cubit<TaskState> {
   //! Insert Task
 
   List<TaskModel> tasksList = [];
+
   void insertTask() async {
     emit(InsertTaskLoadingState());
 
@@ -133,6 +151,20 @@ class TaskCubit extends Cubit<TaskState> {
       await Future.delayed(const Duration(seconds: 2));
       await sl<SqfliteHelper>().insertToDB(
         TaskModel(
+          date: DateFormat.yMd().format(currentDate),
+          title: titleController.text,
+          note: noteController.text,
+          startTime: startTime,
+          endTime: endTime,
+          isCompleted: 0,
+          color: currentIndex,
+        ),
+      );
+      LocalNotificationService.showScheduledNotification(
+        currentDate: currentDate,
+        scheduleTime: scheduledTime,
+        taskModel: TaskModel(
+          id: tasksList.length + 1,
           date: DateFormat.yMd().format(currentDate),
           title: titleController.text,
           note: noteController.text,
@@ -196,18 +228,20 @@ class TaskCubit extends Cubit<TaskState> {
     });
   }
 
+//! Change Theme
   void changeTheme() async {
     isDark = !isDark;
     await sl<CacheHelper>().saveData(key: 'isDark', value: isDark);
     emit(ChangeThemeState());
   }
 
+  //! get Theme
   void getTheme() async {
     final savedTheme = await sl<CacheHelper>().getData(key: 'isDark');
     if (savedTheme != null && savedTheme is bool) {
       isDark = savedTheme;
     } else {
-      isDark = true; // Default value if no theme is saved
+      isDark = true; //! Default value if no theme is saved
     }
     emit(ChangeThemeState());
   }
